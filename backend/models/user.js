@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -16,14 +17,22 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        required: true,
+        enum: [
+            "Principal",
+            "VicePrincipal",
+            "Coordinator",
+            "Teacher",
+            "AdminStaff",
+            "NonTeachingStaff"
+        ],
+        required: true
     },
     department: {
         type: String,
         required: true,
     },
     employee_id: {
-        type: Int32,
+        type: Number,
         required: true,
     },
     phone: {
@@ -32,6 +41,7 @@ const userSchema = new mongoose.Schema({
     },
 
 })
+
 
 
 module.exports = mongoose.model('User', userSchema);
